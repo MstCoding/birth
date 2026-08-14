@@ -68,7 +68,7 @@ Requires macOS 14 (Sonoma) or later. Primarily developed and tested on macOS 26;
 
 ### Option 1: DMG
 
-Download the latest `Birth-x.x.x.dmg` from [Releases](https://github.com/iAmCorey/birth/releases) and drag Birth into Applications.
+Download the latest `Birth-x.x.x.dmg` from [Releases](https://github.com/iAmCorey/birth/releases) and drag Birth into Applications. The DMG is a universal binary — it runs natively on both Apple Silicon and Intel Macs.
 
 Birth is a personal open-source project and is not notarized by Apple. On **first launch**, macOS will warn that the developer can't be verified: go to System Settings → Privacy & Security and click **"Open Anyway"** at the bottom of the page — once.
 
@@ -81,13 +81,19 @@ cd birth
 open dist/Birth.app
 ```
 
+By default this builds for your machine's architecture (arm64 on Apple Silicon, x86_64 on Intel) — the fastest build and the smallest app. To build a universal app that runs on both chips (the form official DMGs ship in), use:
+
+```bash
+./scripts/make-app.sh universal
+```
+
 (A Homebrew cask is planned.)
 
 ## Development
 
 ```bash
 swift test                    # unit tests
-./scripts/release-check.sh    # release gate: tests → package → self-contained smoke launch → health checks
+./scripts/release-check.sh    # release gate: tests → universal package → self-contained smoke launch → health checks
 ./scripts/make-dmg.sh         # distribution DMG
 ```
 

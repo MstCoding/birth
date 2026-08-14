@@ -68,7 +68,7 @@ macOS 把启动项分散在至少四套机制里：
 
 ### 方式一：下载 DMG
 
-从 [Releases](https://github.com/iAmCorey/birth/releases) 下载最新的 `Birth-x.x.x.dmg`，打开后把 Birth 拖进"应用程序"。
+从 [Releases](https://github.com/iAmCorey/birth/releases) 下载最新的 `Birth-x.x.x.dmg`，打开后把 Birth 拖进"应用程序"。DMG 为 universal 双架构包，Apple Silicon 与 Intel 芯片的 Mac 均可原生运行。
 
 Birth 是个人开源项目，未经 Apple 公证。**首次打开**时 macOS 会提示无法验证开发者：前往 系统设置 → 隐私与安全性，在页面底部点击**"仍要打开"**——只需一次。
 
@@ -81,13 +81,19 @@ cd birth
 open dist/Birth.app
 ```
 
+默认按本机芯片架构构建（Apple Silicon 出 arm64，Intel 出 x86_64），编译最快、体积最小。若要构建两种芯片通用的 universal 包（官方 DMG 即此形态），改用：
+
+```bash
+./scripts/make-app.sh universal
+```
+
 （Homebrew cask 计划中。）
 
 ## 开发
 
 ```bash
 swift test                    # 单元测试
-./scripts/release-check.sh    # 发版门禁：测试 → 打包 → 自包含冒烟 → 健康检查
+./scripts/release-check.sh    # 发版门禁：测试 → universal 打包 → 自包含冒烟 → 健康检查
 ./scripts/make-dmg.sh         # 打包分发用 DMG
 ```
 

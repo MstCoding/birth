@@ -1,11 +1,11 @@
 #!/bin/bash
 # Packages dist/Birth.app into a drag-to-Applications DMG for GitHub
 # Releases — the no-developer-account distribution path.
-#   ./scripts/make-app.sh && ./scripts/make-dmg.sh
+#   ./scripts/make-app.sh universal && ./scripts/make-dmg.sh
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-VERSION="${VERSION:-0.2.9}"
+VERSION="${VERSION:-0.2.10}"
 APP=dist/Birth.app
 DMG="dist/Birth-${VERSION}.dmg"
 

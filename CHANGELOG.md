@@ -2,12 +2,20 @@
 
 本项目遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/) 与[语义化版本](https://semver.org/lang/zh-CN/)。
 
+## [0.2.10] - 2026-08-14
+
+### 修复
+
+- **Intel 芯片 Mac 无法打开**（[#6](https://github.com/iAmCorey/birth/issues/6)）：此前发布的 DMG 只含 arm64 架构，Intel Mac 安装后无法启动。发布包改为 universal 双架构（arm64 + x86_64），Apple Silicon 与 Intel 均原生运行；发版门禁固定以 universal 构建，此问题不再复发
+
 ## [0.2.9] - 2026-08-09
 
 ### 修复
 
 - **Xcode 等 Apple 自家 App Store 应用被误标"伪装系统项"**：Apple 自家上架 App Store 的应用（Xcode、TestFlight、Numbers 等）走 App Store 签名链而非系统软件签名链，出现在登录项里会被误报为伪装并附恶意软件警告。现在以签名内嵌的商店管控标识符（第三方无法注册 com.apple.\* 命名空间）裁决 Apple 正品，误报消除；这类应用按第三方软件对待，仍显示在第三方视图中，开发者列显示"Apple（App Store）"
 - **com.apple.\* 登录项一律由真实签名检查裁决**：BTM 登录项桥接不再为 com.apple.\* 记录预填签名结论——预填结论永不复查，正向把 Xcode 们钉成伪装，反向会把自称 com.apple.\* 的第三方包当作系统项隐藏、绕过伪装检测；两个方向同时闭合。无执行路径的记录保持"未验证"，不作指控
+
+## [0.2.8] - 2026-08-01
 
 ### 修复
 

@@ -18,8 +18,9 @@ fail() {
 echo "==> [1/4] swift test"
 swift test 2>&1 | tail -2
 
-echo "==> [2/4] package"
-./scripts/make-app.sh
+echo "==> [2/4] package (universal)"
+# Release DMGs must run on Apple Silicon AND Intel (#6) — always universal.
+./scripts/make-app.sh universal
 
 echo "==> [3/4] smoke launch"
 # Localization bundles must ride inside the app — a build that passes
